@@ -33,5 +33,6 @@ jobs:
           php-version: '8.4'
           extensions: mbstring, pdo_sqlite
           coverage: none
+      - run: cp .env.example .env
       - run: composer install --no-interaction --prefer-dist --no-progress
       - run: php artisan test --display-warnings
