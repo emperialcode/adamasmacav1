@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { ArrowLeft, ArrowRight, BookOpen, ChartColumn, Check, ChevronRight, CircleHelp, Heart, Lightbulb, RotateCcw, Settings, Sparkles, Trophy, Volume2, VolumeX, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, ChartColumn, Check, ChevronRight, CircleHelp, Heart, Lightbulb, RotateCcw, Settings, Sparkles, Trophy, X } from 'lucide-react';
 import { categories as offlineCategories } from './words';
 import { demoMode, games, type Category } from './api';
 import { LETTERS, normalizeLetter, type Difficulty, type GameView } from './engine';
@@ -57,7 +57,6 @@ export default function App() {
   const [stats,setStats] = useState<PlayerStats>(getStats);
   const [busy,setBusy] = useState(false);
   const [error,setError] = useState('');
-  const [muted,setMuted] = useState(localStorage.getItem('adamasmaca-muted')==='true');
 
   useEffect(() => {
     games.categories().then(setCategoryList).catch(() => setError('Kategoriler şu anda yüklenemedi.'));
@@ -104,8 +103,6 @@ export default function App() {
   };
 
   const goHome = () => {setScreen('home');setError('');};
-  const wrongLetters = game?.guessed.filter(letter => !game.answer && false) || [];
-  void wrongLetters;
 
   return <div className="app-shell">
     <header className="topbar content-width">
@@ -116,7 +113,6 @@ export default function App() {
       <nav className="top-actions" aria-label="Üst menü">
         <button className="icon-button" aria-label="İstatistikler" title="İstatistikler" onClick={()=>setScreen('stats')}><ChartColumn size={19}/></button>
         <button className="icon-button" aria-label="Nasıl oynanır" title="Nasıl oynanır" onClick={()=>setScreen('rules')}><CircleHelp size={19}/></button>
-        <button className="icon-button" aria-label={muted?'Sesi aç':'Sesi kapat'} title={muted?'Sesi aç':'Sesi kapat'} onClick={()=>{setMuted(!muted);localStorage.setItem('adamasmaca-muted',String(!muted));}}>{muted?<VolumeX size={19}/>:<Volume2 size={19}/>}</button>
       </nav>
     </header>
 
