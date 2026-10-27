@@ -32,7 +32,6 @@ return new class extends Migration {
             $table->uuid('request_id');
             $table->boolean('was_correct');
             $table->timestamps();
-            $table->unique(['game_session_id', 'letter']);
             $table->unique(['game_session_id', 'request_id']);
         });
     }
