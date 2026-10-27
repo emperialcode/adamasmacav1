@@ -34,4 +34,4 @@ jobs:
           extensions: mbstring, pdo_sqlite
           coverage: none
       - run: composer install --no-interaction --prefer-dist --no-progress
-      - run: php artisan test
+      - run: php artisan test --display-warnings
